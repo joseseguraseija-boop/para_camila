@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Para ti, Camila</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        background: linear-gradient(160deg, #0b0b0b, #1a001f, #2a0036);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Georgia', serif;
+        color: #f2e9f7;
+        overflow: hidden;
+    }
+
+    .card {
+        background: rgba(255, 182, 193, 0.08);
+        backdrop-filter: blur(12px);
+        padding: 55px 65px;
+        border-radius: 22px;
+        max-width: 750px;
+        text-align: center;
+        box-shadow: 0 0 60px rgba(186, 85, 211, 0.35);
+        animation: aparecer 2s ease;
+    }
+
+    @keyframes aparecer {
+        from { opacity: 0; transform: translateY(35px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .corazon {
+        font-size: 75px;
+        margin-bottom: 25px;
+        color: #ff9acb;
+        animation: latido 1.6s infinite;
+    }
+
+    @keyframes latido {
+        0% { transform: scale(1); }
+        45% { transform: scale(1.18); }
+        75% { transform: scale(1); }
+    }
+
+    #texto {
+        font-size: 22px;
+        line-height: 1.75;
+        min-height: 200px;
+        white-space: pre-line;
+    }
+
+    button {
+        margin: 15px;
+        padding: 14px 38px;
+        font-size: 18px;
+        border-radius: 35px;
+        border: none;
+        cursor: pointer;
+        background: linear-gradient(135deg, #ff9acb, #b57cff);
+        color: #1a001f;
+        transition: transform 0.3s, box-shadow 0.3s;
+        font-family: 'Georgia', serif;
+    }
+
+    button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(255,154,203,0.55);
+    }
+
+    .oculto {
+        display: none;
+    }
+
+    .pregunta {
+        margin-top: 45px;
+        font-size: 26px;
+        animation: aparecer 1.8s ease;
+    }
+
+    .final {
+        margin-top: 35px;
+        font-size: 23px;
+        animation: aparecer 2s ease;
+        color: #ffd6ea;
+    }
+</style>
+</head>
+
+<body>
+<audio id="musica" loop>
+    <source src="musica.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio.
+</audio>
+
+<div class="card">
+    <div class="corazon">❤</div>
+
+    <div id="texto"></div>
+
+    <button id="continuar" class="oculto">Sigue leyendo, mi amor</button>
+
+    <div id="pregunta" class="pregunta oculto">
+        Camila…  
+        desde aquel <strong>13 de diciembre de 2025</strong>  
+        mi vida cambió contigo.
+
+        <br><br>
+        ¿Quieres casarte conmigo y vivir por el resto de nuetras vidas hasta que la muerte nos separe conmigo?
+    </div>
+
+    <div id="opciones" class="oculto">
+        <button onclick="respuestaSi()">Sí, quiero</button>
+        <button onclick="respuestaNo()">No</button>
+    </div>
+
+    <div id="finalSi" class="final oculto">
+        Gracias por elegirnos.  
+        Prometo conocerte, enamorarte, comprenderte, valorarte, respetarte, consentirte, extrañarte, pensarte, serte fiel, tenerte y amarte incluso en los días difíciles.
+
+        <br><br>
+        Desde ese 13 de diciembre,  
+        y por el resto de nuestra vida Mi Amor.
+    </div>
+
+    <div id="finalNo" class="final oculto">
+        Gracias por tu sinceridad, mi amor.  
+        Lo más importante para mí siempre será tu tranquilidad y tu felicidad.
+
+        <br><br>
+        Independientemente de la respuesta,  
+        lo que siento por ti y lo que hemos vivido
+        siempre lo llevare conmigo como un recuerdo 
+        muy pero muy lindo, Te Amo mucho aunque tu no.
+    </div>
+</div>
+
+<script>
+    const mensaje =
+`Camila, mi amor:
+
+No escribí este código para impresionar,
+lo escribí porque no hay otra forma
+en la que sepa decirte lo que siento.
+
+Cada línea fue pensada en ti.
+Cada pausa lleva tu nombre.
+Y cada latido me recuerda
+que contigo quiero todo.
+
+Hoy no te hablo desde la prisa,
+te hablo desde el corazón,
+con respeto,
+con certeza
+y con amor.
+
+No es una promesa ligera,
+es una decisión consciente.
+Elegirte hoy,
+mañana
+y el resto de mi vida mi amor.`
+
+
+    const texto = document.getElementById("texto");
+    const continuar = document.getElementById("continuar");
+    let i = 0;
+
+    function escribir() {
+        if (i < mensaje.length) {
+            texto.innerHTML += mensaje.charAt(i);
+            i++;
+            setTimeout(escribir, 45);
+        } else {
+            continuar.classList.remove("oculto");
+        }
+    }
+
+    continuar.onclick = () => {
+        continuar.classList.add("oculto");
+        document.getElementById("pregunta").classList.remove("oculto");
+        document.getElementById("opciones").classList.remove("oculto");
+    };
+
+    function respuestaSi() {
+        document.getElementById("opciones").classList.add("oculto");
+        document.getElementById("finalSi").classList.remove("oculto");
+    }
+
+    function respuestaNo() {
+        document.getElementById("opciones").classList.add("oculto");
+        document.getElementById("finalNo").classList.remove("oculto");
+    }
+
+    escribir();
+</script>
+
+</body>
+</html>
